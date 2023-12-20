@@ -1,0 +1,75 @@
+<!-- First name, Last name, Password, Email, Phone number, Courses -->
+<form class="container" #FORM="ngForm" (ngSubmit)="showData(FORM.value)">
+    <div class="row">
+        <div class="col-sm-6 mt-3">
+            <label>First Name</label>
+            <input class="form-control" type="text" name="First-Name" #fname="ngModel" ngModel required
+                pattern="[a-zA-Z]{3,20}" placeholder="Enter First name" [ngClass]="{'is-invalid': fname.invalid && fname.touched}">
+            <div class="invalid-feedback" *ngIf="fname.invalid && fname.touched">
+                <div *ngIf="fname.errors?.['required']">First Name is not Entered</div>
+                <div *ngIf="fname.errors?.['pattern']">atleast 3 and max 20 char</div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-3">
+            <label>Last Name</label>
+            <input class="form-control" type="text" name="Last-Name" #lname="ngModel" ngModel required
+                pattern="[a-zA-Z]{3,20}" placeholder="Enter last name" [ngClass]="{'is-invalid': lname.invalid && lname.touched}">
+            <div class="invalid-feedback" *ngIf="lname.invalid && lname.touched">
+                <div *ngIf="lname.errors?.['required']">Last  Name is not Entered</div>
+                <div *ngIf="lname.errors?.['pattern']">atleast 3 and max 20 char</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 mt-3">
+            <label>E-mail</label>
+            <input class="form-control" type="email" name="Email" #Ename="ngModel" ngModel required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{3}" placeholder="Enter mail id" [ngClass]="{'is-invalid': Ename.invalid && Ename.touched}">
+            <div class="invalid-feedback" *ngIf="Ename.invalid && Ename.touched">
+                <div *ngIf="Ename.errors?.['required']">Mail is not Entered</div>
+                <div *ngIf="Ename.errors?.['pattern']">Enter valid Mail</div>
+            </div>
+        </div>
+        <div class="col-sm-6 mt-3">
+            <label>Phone Number</label>
+            <input class="form-control" type="tel" name="Phone" #Num="ngModel" ngModel required
+                pattern="[0-9]{10}" placeholder="Enter Number" [ngClass]="{'is-invalid': Num.invalid && Num.touched}">
+            <div class="invalid-feedback" *ngIf="Num.invalid && Num.touched">
+                <div *ngIf="Num.errors?.['required']">Number is not Entered</div>
+                <div *ngIf="Num.errors?.['pattern']">Enter valid Number</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <select class="form-select mt-4" name="Course" #COURSE="ngModel" ngModel required [ngClass]="{'is-invalid': COURSE.invalid && COURSE.touched}">
+                <option value="">Select Course</option>
+                <option value="{{c}}"  *ngFor="let c of courses">{{c}}</option>
+            </select>
+            <div class="invalid-feedback" *ngIf="COURSE.invalid && COURSE.touched">
+                <div *ngIf="COURSE.errors?.['required']">Course is not selected</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-sm-6 mt-3">
+            <label>Password</label>
+            <input class="form-control" type="password" name="Password" #pass="ngModel" ngModel required pattern="[A-Za-z0-9]{8,10}" [ngClass]="{'is-invalid': pass.invalid && pass.touched}">
+            <div class="invalid-feedback" *ngIf="pass.touched && pass.invalid">
+                <div *ngIf="pass.errors?.['required']">
+                    Password not entered
+                </div>
+                <div *ngIf="pass.errors?.['pattern']">
+                    Password must contain Uppercase , smallercase and number init characters (length max 10 , min 8)
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-3">
+            <button class="btn btn-primary" type="submit"  (click)="alert(FORM.invalid)">Submit</button>
+          </div>
+    </div>
+</form>

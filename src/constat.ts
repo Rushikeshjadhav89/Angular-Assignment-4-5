@@ -1,0 +1,1 @@
+export const regEX:string='["a-zA-Z"]{3,30}'
